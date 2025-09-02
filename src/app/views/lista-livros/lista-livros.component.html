@@ -5,11 +5,17 @@
       type="search"
       [formControl]="campoBusca"
     >
-    <button (click)="buscarLivros()">
+    <button>
       <img src="assets/imagens/icone-busca.png" alt="Lupa de cor roxa">
     </button>
   </div>
   <p>Busque por assunto, autoria, nome...</p>
+  <div class="resultados mensagemErro" *ngIf="mensagemErro">
+    {{mensagemErro}}
+  </div>
+  <div class="resultados" *ngIf="livrosEncontrados$ | async">
+    {{livrosResultado.totalItems}} resultados encontrados
+  </div>
 <div class="container-card" *ngIf="livrosEncontrados$ | async as listaLivros, else telaInicial">
   <div *ngFor="let livro of listaLivros">
     <app-livro [livro]="livro"></app-livro>
